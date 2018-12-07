@@ -40,7 +40,7 @@ namespace HairSalon.Tests
         }
 
         [TestMethod]
-        public void GetAll_ReturnsEmptyListFromDatabase_ItemList()
+        public void GetAll_ReturnsEmptyListFromDatabase_StylistList()
         {
             List<Stylist> newList = new List<Stylist> {};
             List<Stylist> result = Stylist.GetAll();

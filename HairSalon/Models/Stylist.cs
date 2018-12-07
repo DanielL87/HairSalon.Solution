@@ -32,23 +32,6 @@ namespace HairSalon.Models
             return _id;
         }
 
-        //overide
-
-           public override bool Equals(System.Object otherStylist)
-            {
-                if (!(otherStylist is Stylist))
-                {
-                    return false;
-                }
-                else
-                {
-                    Stylist newStylist = (Stylist) otherStylist;
-                    bool descriptionEquality = (this.GetName() == newStylist.GetName());
-                    return (descriptionEquality);
-                }
-            }
-
-
         //Blank___All
 
         public void Save()
@@ -133,6 +116,28 @@ namespace HairSalon.Models
                 conn.Dispose();
             }
         }
+
+        //Override
+
+        public override bool Equals(System.Object otherStylist)
+        {
+            if (!(otherStylist is Stylist))
+            {
+                return false;
+            }
+            else
+            {
+                Stylist newStylist = (Stylist) otherStylist;
+                bool descriptionEquality = (this.GetName() == newStylist.GetName());
+                return (descriptionEquality);
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return this.GetName().GetHashCode();
+        }   
+
 
     }   
 }     
