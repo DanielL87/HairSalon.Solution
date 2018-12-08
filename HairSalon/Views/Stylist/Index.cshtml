@@ -1,6 +1,6 @@
 
-<h2>Stylists</h2>
-<h3>Click on Stylists below to see Clients options </h3>
+<h2>Current List of Stylists</h2>
+<h3>Click on Stylists below to see Clients Options </h3>
 <ul>
 @if(@Model.Count == 0)
 {
@@ -13,11 +13,10 @@ else
 @foreach(var stylist in Model)
 {
   <li><a href="/stylist/show/@stylist.GetId()">@stylist.GetName()</a></li>
-
-<h4>Click <a href="/stylist/new"> here </a> to add a new stylist. </h4>
-<h3><a href="/">Back to Home page</a></h3>
 }
 
+<h3>Click <a href="/stylists/new"> here </a> to add a new stylist. </h3>
+<h3><a href="/">Back to Home page</a></h3>
 }
 </ul>
 
