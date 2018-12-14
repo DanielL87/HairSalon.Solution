@@ -151,8 +151,9 @@ namespace HairSalon.Models
             {
                 Client newClient = (Client) otherClient;
                 bool areIdsEqual = (this.GetId() == newClient.GetId());
-                bool areDescriptionsEqual = (this.GetName() == newClient.GetName());
-                return (areIdsEqual && areDescriptionsEqual);
+                bool areNamesEqual = (this.GetName() == newClient.GetName());
+                bool areStylistsEqual = (this.GetStylistId() == newClient.GetStylistId());
+                return (areIdsEqual && areNamesEqual && areStylistsEqual);
             }
         }
 

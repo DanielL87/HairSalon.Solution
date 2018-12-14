@@ -74,12 +74,15 @@ namespace HairSalon.Tests
         public void FindClientsByStylistId_ReturnsListOfClientsWithSameStylist_List()
         {
             //Arrange
-            Client client1 = new Client("Mark", 1);
+            Client client1 = new Client("Mark",1);
             client1.Save();
             
             List <Client> result1 = Client.FindByStylistId(1);
 
-            Assert.AreEqual(result1, client1);
+            string clientName1 = result1[0].GetName();
+            string clientName2 = client1.GetName();
+
+            Assert.AreEqual(clientName2, clientName1);
         }
     }
 }        
