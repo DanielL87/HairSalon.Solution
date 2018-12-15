@@ -17,13 +17,6 @@ namespace HairSalon.Controllers
             return View(model);
         }  
 
-        // [HttpGet("/clients/new")]
-        // public ActionResult New()
-        // {
-        //  List<Stylist> allStylists = Stylist.GetAll();   
-        //  return View(allStylists);   
-        // }
-
         [HttpPost("/stylists/{stylistId}/clients/new/")]
          public ActionResult Show(string clientName, int stylistId) 
         {
@@ -32,9 +25,10 @@ namespace HairSalon.Controllers
             Dictionary<string, object> model = new Dictionary<string, object>();
             Stylist myStylist = Stylist.FindById(stylistId);
             List<Client> myClient = Client.FindByStylistId(stylistId);
+           
             model.Add("stylist", myStylist);
-            model.Add("client", myClient);
-            
+            model.Add("clients", myClient);
+           
             return View("Index", model);
         }
     }
