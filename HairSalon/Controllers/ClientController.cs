@@ -9,16 +9,20 @@ namespace HairSalon.Controllers
         [HttpGet("/stylist/show/{id}")]
         public ActionResult Index(int id)
         {   
-            List<Client> allClients = Client.FindByStylistId(id);
-            return View(allClients);   
+            Stylist foundStylist = Stylist.FindById(id);
+            Dictionary<string, object> model = new Dictionary<string, object> ();
+            List<Client> allClients = Client.FindByStylistId(id);  
+            model.Add("stylist", foundStylist);
+            model.Add("clients", allClients);
+            return View(model);
         }  
 
-        [HttpGet("/clients/new")]
-        public ActionResult New()
-        {
-         List<Stylist> allStylists = Stylist.GetAll();   
-         return View(allStylists);   
-        }
+        // [HttpGet("/clients/new")]
+        // public ActionResult New()
+        // {
+        //  List<Stylist> allStylists = Stylist.GetAll();   
+        //  return View(allStylists);   
+        // }
 
         [HttpPost("/stylists/{stylistId}/clients/new/")]
          public ActionResult Show(string clientName, int stylistId) 
@@ -31,7 +35,7 @@ namespace HairSalon.Controllers
             model.Add("stylist", myStylist);
             model.Add("client", myClient);
             
-            return View("New", model);
+            return View("Index", model);
         }
     }
 }    
