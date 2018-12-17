@@ -10,17 +10,6 @@ namespace HairSalon.Tests
     public class ClientControllerTest
     {
 
-    [TestMethod]
-    public void Create_ReturnsCorrectActionType_RedirectToActionResult()
-        {
-            //Arrange
-            ClientController controller = new ClientController();
-
-            //Act
-            IActionResult view = controller.Index(1);
-
-            //Assert
-            Assert.IsInstanceOfType(view, typeof(ActionResult));
-        }
+   
     }
 }

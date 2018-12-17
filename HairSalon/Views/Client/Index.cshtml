@@ -1,26 +1,6 @@
-<h2>List of Client Names for @Model["stylist"].GetName():</h2>
+<H3>List of Current Clients:</H3>
 
-@foreach(var client in Model["clients"])
-
+@foreach (var client in Model)
 {
-  <li>@client.GetName()</li>
+    <li>@client.GetName()</li>    
 }
-
-
-
-<h3>Add A New Client for this Stylist</h3>
-
- <form action="/stylists/@Model["stylist"].GetId()/clients/new/" method="post">
-            <div class="col col-md-3">
-                <label for="clientName">Client Name:</label>
-                <input class="form-control" id="clientName" name="clientName" type="text" required><br>
-            </div>  
-
-    <br>
-    <button class="btn btn-primary btn-lg" type="submit">Add</button>       
-</form>
-
-
-<h3>Click <a href="/stylists/new"> here </a> to add a new stylist. </h3>
-<h3><a href="/stylists/index">Back to Stylists page</a></h3>
-<h3><a href="/">Back to Home page</a></h3>

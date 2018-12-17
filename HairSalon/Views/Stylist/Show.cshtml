@@ -1,11 +1,26 @@
-<h2>Current List of Stylists</h2>
-<h3>Click on Stylists below to see Clients Options </h3>
+<h2>List of Client Names for @Model["stylist"].GetName():</h2>
 
-<ul>
-@foreach(var stylist in Model)
+@foreach(var client in Model["clients"])
+
 {
-  <li><a href="/stylist/show/@stylist.GetId()">@stylist.GetName()</a></li>
+  <li>@client.GetName()</li>
 }
-</ul>
-<h4>Click <a href="/stylists/new"> here </a> to add a new stylist. </h4>
+
+
+
+<h3>Add A New Client for this Stylist</h3>
+
+ <form action="/stylists/@Model["stylist"].GetId()/clients/new/" method="post">
+            <div class="col col-md-3">
+                <label for="clientName">Client Name:</label>
+                <input class="form-control" id="clientName" name="clientName" type="text" required><br>
+            </div>  
+
+    <br>
+    <button class="btn btn-primary btn-lg" type="submit">Add</button>       
+</form>
+
+<h3>Click <a href="/stylists/@Model["stylist"].GetId()/remove"> here </a> to remove @Model["stylist"].GetName()</h3>
+<h3>Click <a href="/stylists/new"> here </a> to add a new stylist. </h3>
+<h3><a href="/stylists/index">Back to Stylists page</a></h3>
 <h3><a href="/">Back to Home page</a></h3>
