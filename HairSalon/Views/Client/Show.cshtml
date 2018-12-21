@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+
+<h3>Client Name:@Model.GetName()</h3>
+
+<form action='/client/@Model.GetId()/edit' method="post">
+        <div class="col col-md-3">
+            <label for="clientName">Update Client Name:</label>
+            <input class="form-control" id="clientName" name="clientName" type="text" required><br>
+        </div>  
+
+    <br>
+    <button class="btn btn-primary btn-lg" type="submit">Update</button>  
+</form>
+
+<h3>Click <a href="/clients/@Model.GetId()/remove"> here </a> to remove @Model.GetName()</h3>

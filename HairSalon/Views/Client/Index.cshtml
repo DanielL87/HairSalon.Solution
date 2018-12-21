@@ -1,6 +1,11 @@
+@{
+  Layout = "_Layout";
+}
 <H3>List of Current Clients:</H3>
 
 @foreach (var client in Model)
 {
-    <li>@client.GetName()</li>    
+    <li><a href="/clients/@client.GetId()/show">@client.GetName()</a></li>    
 }
+
+<h3>Click <a href="/clients/removeall"> here </a> to remove all clients. </h3>

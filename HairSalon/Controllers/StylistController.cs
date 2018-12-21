@@ -41,7 +41,7 @@ namespace HairSalon.Controllers
         }  
 
         [HttpPost("/stylists/{stylistId}/clients/new/")]
-         public ActionResult Show(string clientName, int stylistId) 
+         public ActionResult CreateClient(string clientName, int stylistId) 
         {
             Client newClient = new Client(clientName, stylistId);
             newClient.Save();
@@ -56,10 +56,25 @@ namespace HairSalon.Controllers
         }
 
         [HttpGet("/stylists/{id}/remove")]
-        public ActionResult IndexNew(int id)
+        public ActionResult Remove(int id)
         {
          Stylist.DeleteStylistById(id);
          return RedirectToAction("Index");
+        }
+
+        [HttpGet("/stylists/removeall")]
+        public ActionResult RemoveAll()  
+        {  
+          Stylist.ClearAll();  
+          return RedirectToAction("Index");
+        }
+
+        [HttpPost("stylist/{id}/edit")]
+        public ActionResult EditName(int id, string stylistName)
+        { 
+          Stylist foundStylist = Stylist.FindById(id);  
+          foundStylist.EditName(stylistName);
+          return RedirectToAction("Show"); 
         }
     }
 }

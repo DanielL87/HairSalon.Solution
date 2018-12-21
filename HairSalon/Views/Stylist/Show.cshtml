@@ -1,6 +1,10 @@
+@{
+  Layout = "_Layout";
+}
+
 <h2>List of Client Names for @Model["stylist"].GetName():</h2>
 
-@foreach(var client in Model["clients"])
+@foreach(var client in @Model["clients"])
 
 {
   <li>@client.GetName()</li>
@@ -10,7 +14,7 @@
 
 <h3>Add A New Client for this Stylist</h3>
 
- <form action="/stylists/@Model["stylist"].GetId()/clients/new/" method="post">
+ <form action='/stylists/@Model["stylist"].GetId()/clients/new/' method="post">
             <div class="col col-md-3">
                 <label for="clientName">Client Name:</label>
                 <input class="form-control" id="clientName" name="clientName" type="text" required><br>
@@ -19,8 +23,18 @@
     <br>
     <button class="btn btn-primary btn-lg" type="submit">Add</button>       
 </form>
+  
+<br>
+<form action='/stylist/@Model["stylist"].GetId()/edit' method="post">
+        <div class="col col-md-3">
+            <label for="stylistName">Update Stylist Name:</label>
+            <input class="form-control" id="stylistName" name="stylistName" type="text" required><br>
+        </div>  
 
-<h3>Click <a href="/stylists/@Model["stylist"].GetId()/remove"> here </a> to remove @Model["stylist"].GetName()</h3>
+    <br>
+    <button class="btn btn-primary btn-lg" type="submit">Update</button>  
+</form>
+
+
+<h3>Click <a href='/stylists/@Model["stylist"].GetId()/remove'> here </a> to remove @Model["stylist"].GetName()</h3>
 <h3>Click <a href="/stylists/new"> here </a> to add a new stylist. </h3>
-<h3><a href="/stylists/index">Back to Stylists page</a></h3>
-<h3><a href="/">Back to Home page</a></h3>
