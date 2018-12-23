@@ -45,5 +45,16 @@ namespace HairSalon.Tests
             List<Specialty> result = Specialty.GetAll();
             CollectionAssert.AreEqual(newList, result);
         }
+
+        [TestMethod]
+        public void FindById_ReturnsTrueIfIdsAreTheSame_Int()
+        {
+            //Arrange
+            Specialty specialty1 = new Specialty("nails", 1);
+            specialty1.Save();
+            int resultId = specialty1.GetId();
+            Specialty result = Specialty.FindById(resultId);
+            Assert.AreEqual(result, specialty1);
+        }
     }
 }    

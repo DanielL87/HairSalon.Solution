@@ -10,7 +10,11 @@
   <li>@client.GetName()</li>
 }
 
-
+<h3>Current Specialties for @Model["stylist"].GetName():</h3>
+@foreach (var stylistSpecialty in Model["stylistSpecialties"])
+{
+    <li>@stylistSpecialty.GetDescription()</li>
+}
 
 <h3>Add A New Client for this Stylist</h3>
 
@@ -23,6 +27,18 @@
     <br>
     <button class="btn btn-primary btn-lg" type="submit">Add</button>       
 </form>
+
+<h3>Add a Specialty/ies to @Model["stylist"].GetName():</h3>
+<form action='/stylist/@Model["stylist"].GetId()/addspecialty' method="post">
+    <select name="specialtyId">
+            @foreach(var specialty in Model["specialties"])
+            {
+                <option class="dropdown-item" value=@specialty.GetId()>@specialty.GetDescription()</option>
+            }
+    </select>
+     <button class="btn btn-primary btn-lg" type="submit">Add</button>
+</form>
+
   
 <br>
 <form action='/stylist/@Model["stylist"].GetId()/edit' method="post">

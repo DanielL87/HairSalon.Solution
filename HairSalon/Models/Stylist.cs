@@ -102,6 +102,62 @@ namespace HairSalon.Models
             return newStylist;
         }
 
+        public void AddSpecialty(Specialty newSpecialty)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"INSERT INTO stylist_specialty (stylist_id, specialty_id) VALUES (@StylistsId, @SpecialtyId);";
+            
+            MySqlParameter Stylists_id = new MySqlParameter();
+            Stylists_id.ParameterName = "@StylistsId";
+            Stylists_id.Value = _id;
+            cmd.Parameters.Add(Stylists_id);
+
+            MySqlParameter Specialty_id = new MySqlParameter();
+            Specialty_id.ParameterName = "@SpecialtyId";
+            Specialty_id.Value = newSpecialty.GetId();
+            cmd.Parameters.Add(Specialty_id);
+        
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+
+        }
+
+        public List<Specialty> GetSpecialties()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT specialty.* FROM stylist
+                JOIN stylist_specialty ON (stylist.id = stylist_specialty.stylist_id)
+                JOIN specialty ON (stylist_specialty.specialty_id = specialty.id)
+                WHERE stylist.id = @stylistId;";
+            MySqlParameter stylistsIdParameter = new MySqlParameter();
+            stylistsIdParameter.ParameterName = "@stylistId";
+            stylistsIdParameter.Value = _id;
+            cmd.Parameters.Add(stylistsIdParameter);
+            MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+            List<Specialty> specialties = new List<Specialty>{};
+            while(rdr.Read())
+            {
+            int SpecialtyId = rdr.GetInt32(0);
+            string SpecialtyName = rdr.GetString(1);
+            Specialty newSpecialty = new Specialty(SpecialtyName, SpecialtyId);
+            specialties.Add(newSpecialty);
+            }
+            conn.Close();
+            if (conn != null)
+            {
+            conn.Dispose();
+            }
+            return specialties;
+        }
+
         public void EditName(string newName)
         {
             MySqlConnection conn = DB.Connection();

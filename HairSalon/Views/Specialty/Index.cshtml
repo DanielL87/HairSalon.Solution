@@ -1,0 +1,22 @@
+@{
+  Layout = "_Layout";
+}
+<h2>Current List of Specialties Our Salon Provides:</h2>
+<h3>Click on a specialty to see which of our stylists offers that service</h3>
+<ul>
+@if(@Model.Count == 0)
+{
+    <h4>Oh No! You have no Specialties!</h4>
+    <h4>Click <a href="/specialties/new"> HERE </a> to add some now.</h4>
+}
+else
+{
+@foreach(var specialty in Model)
+{
+  <li><a href="/specialties/show/@specialty.GetId()">@specialty.GetDescription()</a></li>
+}
+
+<h3>Click <a href="/specialties/new"> here </a> to add a new specialty. </h3>
+<h3>Click <a href="/specialties/removeall"> here </a> to remove all specialties. </h3>
+}
+</ul>

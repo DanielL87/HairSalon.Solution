@@ -6,7 +6,7 @@ namespace HairSalon.Controllers
 {
     public class StylistController : Controller
     {
-       [HttpGet("/stylists/index")]
+       [HttpGet("/stylists")]
         public ActionResult Index()
         {
             List<Stylist> allStylists = Stylist.GetAll();
@@ -16,8 +16,8 @@ namespace HairSalon.Controllers
         [HttpGet("/stylists/new")]
         public ActionResult New()
         {
-            List<Stylist> allStylists = Stylist.GetAll();
-            return View(allStylists);   
+           
+            return View();   
         }  
 
         [HttpPost("/stylists")]
@@ -34,9 +34,13 @@ namespace HairSalon.Controllers
         {   
             Stylist foundStylist = Stylist.FindById(id);
             Dictionary<string, object> model = new Dictionary<string, object> ();
-            List<Client> allClients = Client.FindByStylistId(id);  
+            List<Client> allClients = Client.FindByStylistId(id); 
+            List<Specialty> allSpecialties = Specialty.GetAll(); 
+            List<Specialty> stylistsSpecialties = foundStylist.GetSpecialties();
             model.Add("stylist", foundStylist);
             model.Add("clients", allClients);
+            model.Add("specialties", allSpecialties);
+            model.Add("stylistSpecialties", stylistsSpecialties);
             return View(model);
         }  
 
@@ -76,5 +80,15 @@ namespace HairSalon.Controllers
           foundStylist.EditName(stylistName);
           return RedirectToAction("Show"); 
         }
+
+        [HttpPost("/stylist/{id}/addspecialty")]
+        public ActionResult AddSpecialty(int id, int specialtyId)
+        {
+          Specialty foundSpecialty = Specialty.FindById(specialtyId);
+          Stylist foundStylist = Stylist.FindById(id);
+          foundStylist.AddSpecialty(foundSpecialty);
+          return RedirectToAction("Show", id);  
+        }
+        
     }
 }
