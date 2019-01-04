@@ -9,7 +9,14 @@ namespace HairSalon.Tests
     [TestClass]
     public class ClientControllerTest
     {
+        [TestMethod]
+        public void Client_ReturnsCorrect_View()
+        {
+            ClientController testController = new ClientController();
 
-   
+            ActionResult indexView = testController.Index();
+
+            Assert.IsInstanceOfType(indexView, typeof(ViewResult));
+        }
     }
 }
